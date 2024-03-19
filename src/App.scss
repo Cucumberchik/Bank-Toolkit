@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Latin:wght@100..800&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Varela+Round&display=swap');
+:root {
+    --font-family: "Roboto Flex", sans-serif;
+    --second-family: "Anek Latin", sans-serif;
+    --third-family: "Varela Round", sans-serif;
+  }
+$font: "Inter", sans-serif;
+$gray50: #F7FAFC;
+$gray300: #CBD5E0;
+$gray600: #4A5568;
+$gray900: #171923;
+$blackAlpha800: #000000da;
+body{
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(20,20,20,1) 37%, rgba(20,20,20,1) 61%, rgba(24,24,24,1) 100%);
+}
+#Home{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    section{
+        width: 95%;
+        
+    }
+    .balance{
+        padding: 5px 10px;
+        border-radius: 20px;
+        width: 200px;
+        border: 2px solid rgba(167, 167, 167, 0.123);
+        backdrop-filter: blur(50px);
+        background: linear-gradient(90deg, rgba(45, 52, 62, 0.226) 0%, rgba(64, 73, 89, 0.13) 100%); 
+        h1{
+            font-family: var(--third-family);
+            font-weight: 600;
+            font-size: 21px;
+            line-height: 114%;
+            letter-spacing: 0.01em;
+            color: #fff;
+        }
+        span{
+            font-weight: 500;
+            font-size: 18px;
+            color: $gray300;
+        }
+        a{
+            text-decoration: none;
+            padding: 5px 10px;
+            font-weight: 500;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            border: 1px solid rgb(127, 138, 173);
+            border-radius: 10px;
+            color: rgb(201, 201, 201);
+            background-color: #4f5368;
+        }
+    }
+    .graphic{
+        height: 300px;
+        margin-top: 40px;
+    }
+}
+#action{
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    input{
+        outline: none;
+        width: 240px;
+        height: 25px;
+        font-size: 18px;
+        height: 25px;
+    }
+    section{
+        width: 70%;
+        height: 450px;
+        background: $gray600;
+        padding: 30px;
+    }
+    .put{
+        height: 100px;
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        button{
+            width: 100px;
+            height: 31px;
+            font-size: 18px;
+        }
+    }
+    .get_money{
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        input{
+            width: 400px;
+        }
+        button{
+            width: 200px;
+            height: 30px;
+            font-size: 20px;
+        }
+        a{
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 22px;
+        }
+    }
+}
