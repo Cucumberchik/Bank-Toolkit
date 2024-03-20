@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 let State ={
     balance: JSON.parse(localStorage.getItem('balance')) || "1000", 
     history: JSON.parse(localStorage.getItem('history')) || [],
-    get: JSON.parse(localStorage.getItem('get')) || []
+    get: JSON.parse(localStorage.getItem('get')) || [],
+    set: JSON.parse(localStorage.getItem("set")) || []
 }
 let initialState = {
     ...State,
@@ -25,6 +26,8 @@ export const BankAction = createSlice({
               localStorage.setItem("history", JSON.stringify(history));
               state.history = history;
             }
+            let data = [...state.get, action.payload];
+            localStorage.setItem("set", JSON.stringify(data));
             localStorage.setItem("balance", JSON.stringify(balance));
             state.balance = balance;
             state.alert = state.balance < 200? true: false;
