@@ -1,24 +1,40 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getMoneyContent } from "../../reducers/reducer/bank";
+import { addMoney, getMoneyContent } from "../../reducers/reducer/bank";
 
 export default function Actions() {
+  let {balance} = useSelector(state=>state)
     const [replenish, setReplenish] = useState('');
     const [getMoney, setGetMoney] = useState({price: "", product: "", category: ""})
-    let valuesNum = replenish.replace(/[a-z]/gi, '');
-    let price = getMoney.price.replace(/[a-z]/gi, '');
+    let valuesNum = replenish.split('').filter(el=> +el == el).join('');
+    let price = getMoney.price.split('').filter(el=> +el == el).join('');
+    let date = Date().split(' ').slice(1).slice(0, 4).join(' ');
 
     let dispatch = useDispatch()
     function getMoneyProduct(){
-        if(getMoney.category && getMoney.price && getMoney.product){
-            let data = {...getMoney, id: Date.now(), data: Date().split(' ').slice(1).slice(0, 4).join(' ')};
-            dispatch(getMoneyContent(data))
-            setGetMoney({price: "", product: "", category: ""})
-        } else{
-            alert("Error")
-            return
+        if((+balance - +getMoney.price)>0){
+          if(getMoney.category && getMoney.price && getMoney.product){
+            let data = {...getMoney, price: getMoney.price.split('').filter(el=> +el == el).join('')};
+              let item = {...data, id: Date.now(), date};
+              dispatch(getMoneyContent(item));
+              setGetMoney({price: "", product: "", category: ""});
+          } else{
+              alert("Error");
+              return;
+          }
+        }else{
+        alert("у вас не хватает денег");
         }
+    }
+    function replenishGet(){
+      if(valuesNum){
+        let Object = {date, replenish: valuesNum}
+        dispatch(addMoney(Object))
+        setReplenish('')
+      }else{
+        alert('error')
+      }
     }
 
   return (
@@ -26,7 +42,7 @@ export default function Actions() {
       <section>
         <div className="put">
             <input value={valuesNum} onChange={(e)=>setReplenish(e.target.value)} type="text" placeholder='sum'/>
-            <button>Replenish</button>
+            <button onClick={replenishGet}>Replenish</button>
         </div>
         <div className="get_money">
             <input value={price} type="text" onChange={(e)=>setGetMoney({...getMoney, price: e.target.value})} placeholder='price'/>
